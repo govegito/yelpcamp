@@ -1,0 +1,55 @@
+<% include partials/header.ejs%>
+
+
+
+<div class="container bg-light">
+    <div class="row"> 
+        <div class="col-md-3">
+            <p>YELPCAMP</p>
+        </div>
+
+        <div class="col-md-9">
+            <div class="thumbnail border border-primary mb-2">
+                <img class="img-responsive w-100"src="<%=camps.img%>">
+                <h4 class="text-uppercase"><%=camps.name%></h4>
+                <p>
+                    <%=camps.desc%>
+                </p>
+                <p><em>submitted by: <%=camps.author.username%></em></p>
+                <%if(currentUser&&camps.author.id.equals(currentUser._id)){%>
+                <a href="/campgrounds/<%=camps._id%>/edit" class="btn btn-sm btn-warning">EDIT</a>
+                <form style="display: inline;" action="/campgrounds/<%=camps._id%>?_method=DELETE" method="POST">
+                  <button class="btn btn-sm btn-danger">DELETE</button>
+                </form>
+                <%}%>
+            </div>
+            <div class="well border border-success bg-light">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-success float-right" href="/campgrounds/<%=camps._id%>/comment/new"> Add New Comment</a>
+                    </div>
+                    <div class="col-md-12">
+                      <% camps.Comments.forEach(function(comment){ %>
+                          <p class="font-weight-light font-italic mb-0">
+                             <strong><%= comment.author.username %></strong>
+                             <%= comment.text %>
+                          </p>
+                          <%if(currentUser&&comment.author.id.equals(currentUser._id)){%>
+                          <a style="display: inline;"  class="btn btn-warning btn-sm" href="/campgrounds/<%=camps._id%>/comment/<%=comment._id%>/edit">
+                            EDIT
+                          </a>
+                          <form style="display: inline;" action="/campgrounds/<%=camps._id%>/comment/<%=comment._id%>?_method=DELETE" method="POST">
+                            <button class="btn wd-50 btn-sm btn-danger">DELETE</button>
+                          </form>
+                          <%}%>
+                      <% }); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include partials/footer.ejs %>
