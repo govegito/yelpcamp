@@ -15,7 +15,8 @@ var commentsroutes=require('./routes/comments.js');
 var indexroutes=require('./routes/index.js');
 
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://2017uec1575:Jsuthar50@@yelpcamp-ao6pw.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
+
 var Campground = require('./models/campgrounds.js');
 
 
