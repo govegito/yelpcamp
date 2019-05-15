@@ -61,6 +61,4 @@ app.use(indexroutes);
 
 
 
-app.listen(3000, function(){
-	console.log("okay");
-});
+app.listen(process.env.PORT, process.env.IP);
